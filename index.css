@@ -22,9 +22,10 @@ body {
     align-items: center;
 }
 
-.letters {
+/* .letters {
     background-color: aliceblue;
-}
+} */
+
 .letterClass {
     height: 50px;
     width: 50px;
@@ -33,12 +34,14 @@ body {
     font-weight: bold;
 }
 
-/*
-.hanger {
-    height: 300px;
-    width: 300px;
-    background-color: aliceblue;
+.alphabet {
+    padding-top: 50px;
 }
-*/
+
+
+/* .hanger {
+    background-color: aliceblue;
+} */
+
 
 
