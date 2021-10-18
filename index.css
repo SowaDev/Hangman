@@ -43,6 +43,19 @@ body {
     padding-left: 20%;
     flex-shrink: 0;
     padding-right: 10%;
+    min-width: 500;
+    min-height: 500;
+}
+
+.winLose {
+    justify-self: flex-start;
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+    font-weight: bolder;
+    font-size: 40px;
+    background-color: transparent;
+    border: 0;
+    color: #e0dbd1;
+    visibility: hidden;
 }
 
 .again {
@@ -54,5 +67,6 @@ body {
     font-family: "Comic Sans MS", "Comic Sans", cursive;
     font-weight: bolder;
     font-size: 40px;
+    visibility: hidden;
 }
 
