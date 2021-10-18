@@ -1,12 +1,11 @@
 class Draw {
-    constructor(context, ctx, wordToGuess){
-        this._context = context
-        this._ctx = ctx
+    constructor(wordToGuess){
         this._wordToGuess = wordToGuess
+        this.unCanvas = this.createCanvas('.letters', 800, 150)
+        this._ctx = this.unCanvas.getContext('2d')
+        this.haCanvas = this.createCanvas('.hanger', 500, 500)
+        this._context = this.haCanvas.getContext('2d')
         this.drawXCoordinates = []
-    }
-    set context (context) {
-        this._context = context
     }
 
     get context () {
@@ -21,15 +20,37 @@ class Draw {
         return this._wordToGuess
     }
 
-    drawUnderscores(word){
+    set wordToGuess (word) {
+        this._wordToGuess = word
+    }
+
+    clearContext(){
+        this.ctx.clearRect(0,0,this.unCanvas.width, this.unCanvas.height)
+        this.context.clearRect(0,0,this.haCanvas.width,this.haCanvas.height)
+    }
+
+
+    createCanvas(query, width, height){
+        const canvas = document.querySelector(query)
+        canvas.width = width
+        canvas.height = height
+        return canvas
+    }
+
+    drawUnderscores(){
         /** @type {HTMLCanvasElement} */
         const lineLength = 45;
         let beggining = 0;
-        for(let i = 0; i < word.length; i++){
+        for(let i = 0; i < this.wordToGuess.length; i++){
             let space = Math.floor(Math.random()*10 + 20)
             beggining = this.drawAUnderscore(beggining, lineLength, space)
         } 
-        return beggining
+        this.moveToMiddle(beggining)
+    }
+
+    moveToMiddle(length){
+        let move = 850 - length
+        this.unCanvas.style.paddingLeft = `${move}px`
     }
 
     drawAUnderscore(beggining, lineLength, space){
@@ -53,10 +74,9 @@ class Draw {
         this.ctx.font = "30px Arial";
         this.ctx.fillStyle = '#e0dbd1'
         for(let i = 0; i < indices.length; i++){
-            console.log(this.drawXCoordinates[indices[i]])
             this.ctx.font = "50px Comic Sans MS"
             this.ctx.fillStyle = '#e0dbd1'
-            this.ctx.fillText(letter, this.drawXCoordinates[indices[i]],90)
+            this.ctx.fillText(letter, this.drawXCoordinates[indices[i]] + 5,90)
         }
     }
 

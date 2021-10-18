@@ -1,16 +1,13 @@
 import Draw from './draw.js'
-const words = ['marine', 'butterfly', 'house', 'animal', 'bridge', 'car']
+const words = ['marine', 'butterfly', 'house', 'animal', 'bridge', 'car', 'leaf', 'spider', 'bird', 'whale', 'keyboard']
 const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K',
 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
 let wordToGuess = words[Math.floor(Math.random() * words.length)].toUpperCase();
-// document.getElementById('welcomeText').innerText = wordToGuess
+var againButton
+var winLoseButton = document.querySelector('.winLose')
+var goodGuesses = 0
 var badGuesses = 0
-var againButton;
-
-fetch('words.txt')
-    .then(response => response.text())
-    .then(text => console.log(text))
-
+var draw
 
 const createButtons = () => {
     for(let i = 0; i < alphabet.length; i++){
@@ -28,7 +25,9 @@ const createButtons = () => {
         else
             secondRow.appendChild(letter)
     }
+
 }
+
 
 const createPlayAgainButton = () => {
     againButton = document.createElement('button')
@@ -36,35 +35,31 @@ const createPlayAgainButton = () => {
     againButton.innerText = 'Play Again?'
     const middle = document.querySelector('.middle')
     middle.appendChild(againButton)
-    againButton.style.visibility = 'hidden'
-    //againButton.addEventListener('click', play)
+    againButton.addEventListener('click', playAgain)
 }
 
-const canvas = document.querySelector('.letters')
-canvas.width = 800;
-canvas.height = 150;
-const ctx = canvas.getContext("2d")
+const playAgain = () => {
+    draw.clearContext();
+    againButton.style.visibility = 'hidden'
+    winLoseButton.style.visibility = 'hidden'
+    wordToGuess = words[Math.floor(Math.random() * words.length)].toUpperCase();
+    draw.wordToGuess = wordToGuess
+    draw.drawUnderscores()
+    goodGuesses = 0
+    badGuesses = 0
+    let letters = document.getElementsByClassName('letterClass')
+    for(let letter of letters){
+        letter.style.visibility = 'visible'
+    }
+}
 
-const canvasHanger = document.querySelector('.hanger')
-canvasHanger.width = 500;
-canvasHanger.height = 500;
-const context = canvasHanger.getContext("2d")
-
-
-const draw = new Draw(context, ctx, wordToGuess)
-
-let length = draw.drawUnderscores(wordToGuess)
+var draw = new Draw(wordToGuess)
+draw.drawUnderscores()
 createButtons()
 createPlayAgainButton()
-const moveToMiddle = (canvas, length) => {
-    let move = 850 - length
-    canvas.style.paddingLeft = `${move}px`
-}
-
-moveToMiddle(canvas, length)
 
 const handleClick = (letter, button) => {
-    if(badGuesses < 7){
+    if(badGuesses < 7 && goodGuesses < wordToGuess.length){
         check(letter)
         button.style.visibility = 'hidden'
     }
@@ -81,13 +76,21 @@ const findIndices = letter => {
 }
 
 const check = letter => {
-    console.log(letter)
     if(wordToGuess.toUpperCase().includes(letter)){
-        let indices = findIndices(letter)
-        draw.drawLetter(letter, indices)
+        handleGoodGuess(letter)
     } else {
         badGuesses++
         handleBadGuess(badGuesses);
+    }
+}
+
+const handleGoodGuess = letter => {
+    let indices = findIndices(letter)
+    draw.drawLetter(letter, indices)
+    goodGuesses += indices.length
+    if(goodGuesses === wordToGuess.length){
+        winLoseButton.innerText = "You win"
+        winLoseButton.style.visibility = 'visible'
     }
 }
 
@@ -97,9 +100,15 @@ const handleBadGuess = badGuesses => {
     else
         draw.drawHangman(badGuesses)
     if(badGuesses === 7)
-        handleGameLost()
+        handleLose()
 }
 
-const handleGameLost = () => {
-    againButton.style.visibility = 'visible'
+const handleLose = () => {
+    document.querySelector('.again').style.visibility = 'visible'
+    for(let letter of wordToGuess){
+        let indices = findIndices(letter)
+        draw.drawLetter(letter, indices)
+    }
+    winLoseButton.innerText = "You Lose"
+    winLoseButton.style.visibility = 'visible'
 }
