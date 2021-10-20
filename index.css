@@ -39,10 +39,10 @@ body {
     align-items: center;
 }
 
-.hanger {
+.drawing {
     padding-left: 20%;
     flex-shrink: 0;
-    padding-right: 10%;
+    padding-right: 20%;
     min-width: 500;
     min-height: 500;
 }

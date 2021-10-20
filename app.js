@@ -3,11 +3,11 @@ const words = ['marine', 'butterfly', 'house', 'animal', 'bridge', 'car', 'leaf'
 const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K',
 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
 let wordToGuess = words[Math.floor(Math.random() * words.length)].toUpperCase();
-var againButton
+var againButton = document.querySelector('.again')
 var winLoseButton = document.querySelector('.winLose')
 var goodGuesses = 0
 var badGuesses = 0
-var draw
+var draw = new Draw(wordToGuess)
 
 const createButtons = () => {
     for(let i = 0; i < alphabet.length; i++){
@@ -25,16 +25,6 @@ const createButtons = () => {
         else
             secondRow.appendChild(letter)
     }
-
-}
-
-
-const createPlayAgainButton = () => {
-    againButton = document.createElement('button')
-    againButton.className = 'again'
-    againButton.innerText = 'Play Again?'
-    const middle = document.querySelector('.middle')
-    middle.appendChild(againButton)
     againButton.addEventListener('click', playAgain)
 }
 
@@ -53,10 +43,8 @@ const playAgain = () => {
     }
 }
 
-var draw = new Draw(wordToGuess)
 draw.drawUnderscores()
 createButtons()
-createPlayAgainButton()
 
 const handleClick = (letter, button) => {
     if(badGuesses < 7 && goodGuesses < wordToGuess.length){
@@ -89,6 +77,7 @@ const handleGoodGuess = letter => {
     draw.drawLetter(letter, indices)
     goodGuesses += indices.length
     if(goodGuesses === wordToGuess.length){
+        document.querySelector('.again').style.visibility = 'visible'
         winLoseButton.innerText = "You win"
         winLoseButton.style.visibility = 'visible'
     }
