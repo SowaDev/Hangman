@@ -31,6 +31,7 @@ class Draw {
 
 
     createCanvas(query, width, height){
+        /** @type {HTMLCanvasElement} */
         const canvas = document.querySelector(query)
         canvas.width = width
         canvas.height = height
