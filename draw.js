@@ -41,7 +41,7 @@ class Draw {
 		let beggining = 0;
 		for (let i = 0; i < this.wordToGuess.length; i++) {
 			let space = Math.floor(Math.random() * 10 + 20);
-			beggining = this.drawAUnderscore(beggining, lineLength, space);
+			beggining = this.drawUnderscore(beggining, lineLength, space);
 		}
 		this.moveToMiddle(beggining);
 	}
@@ -51,7 +51,7 @@ class Draw {
 		this.unCanvas.style.paddingLeft = `${move}px`;
 	}
 
-	drawAUnderscore(beggining, lineLength, space) {
+	drawUnderscore(beggining, lineLength, space) {
 		this.drawXCoordinates.push(beggining);
 		this.ctx.lineWidth = Math.floor(Math.random() * 2 + 4);
 		let heightA = Math.floor(Math.random() * 6) + 100;
@@ -90,28 +90,28 @@ class Draw {
 				break;
 			case 3:
 				//Draw corpse
-				this.drawALine(300, 200, 300, 350);
+				this.drawLine(300, 200, 300, 350);
 				break;
 			case 4:
 				//Draw right arm
-				this.drawALine(300, 275, 375, 200);
+				this.drawLine(300, 275, 375, 200);
 				break;
 			case 5:
 				//Draw left arm
-				this.drawALine(300, 275, 225, 200);
+				this.drawLine(300, 275, 225, 200);
 				break;
 			case 6:
 				//Draw right leg
-				this.drawALine(300, 350, 350, 425);
+				this.drawLine(300, 350, 350, 425);
 				break;
 			case 7:
 				//Draw left leg
-				this.drawALine(300, 350, 250, 425);
+				this.drawLine(300, 350, 250, 425);
 				break;
 		}
 	}
 
-	drawALine(x1, y1, x2, y2) {
+	drawLine(x1, y1, x2, y2) {
 		this.context.moveTo(x1, y1);
 		this.context.lineTo(x2, y2);
 		this.context.stroke();
@@ -121,8 +121,8 @@ class Draw {
 		this.context.strokeStyle = '#e0dbd1';
 		this.context.lineWidth = 5;
 		this.context.beginPath();
-		this.drawALine(50, 490, 150, 490);
-		this.drawALine(100, 490, 100, 50);
+		this.drawLine(50, 490, 150, 490);
+		this.drawLine(100, 490, 100, 50);
 		this.context.lineTo(300, 50);
 		this.context.lineTo(300, 100);
 		this.context.stroke();
