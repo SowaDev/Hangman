@@ -1,72 +1,71 @@
 body {
-    background-image: url('chalkboard.jpg');
-    min-height: 100%;
-    min-width: 1024px;
-        
-    /* Set up proportionate scaling */
-    width: 100%;
-    height: auto;
-        
-    /* Set up positioning */
-    position: fixed;
-    top: 0;
-    left: 0;
-    color: snow;
-    font-weight: bolder;
+	background-image: url('chalkboard.jpg');
+	min-height: 100%;
+	min-width: 1024px;
+
+	/* Set up proportionate scaling */
+	width: 100%;
+	height: auto;
+
+	/* Set up positioning */
+	position: fixed;
+	top: 0;
+	left: 0;
+	color: snow;
+	font-weight: bolder;
 }
 
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 .letterClass {
-    height: 50px;
-    width: 50px;
-    background-color: rgb(52, 55, 58);
-    color:snow;
-    font-weight: bold;
+	height: 50px;
+	width: 50px;
+	background-color: rgb(52, 55, 58);
+	color: snow;
+	font-weight: bold;
 }
 
 .alphabet {
-    padding-top: 50px;
+	padding-top: 50px;
 }
 
 .middle {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
 }
 
 .drawing {
-    padding-left: 20%;
-    flex-shrink: 0;
-    padding-right: 20%;
-    min-width: 500;
-    min-height: 500;
+	padding-left: 20%;
+	flex-shrink: 0;
+	padding-right: 20%;
+	min-width: 500;
+	min-height: 500;
 }
 
 .winLose {
-    justify-self: flex-start;
-    font-family: "Comic Sans MS", "Comic Sans", cursive;
-    font-weight: bolder;
-    font-size: 40px;
-    background-color: transparent;
-    border: 0;
-    color: #e0dbd1;
-    visibility: hidden;
+	justify-self: flex-start;
+	font-family: 'Comic Sans MS', 'Comic Sans', cursive;
+	font-weight: bolder;
+	font-size: 40px;
+	background-color: transparent;
+	border: 0;
+	color: #e0dbd1;
+	visibility: hidden;
 }
 
 .again {
-    justify-self: flex-end;
-    color: #e0dbd1;
-    background-color: transparent;
-    border-color: #e0dbd1;
-    border-width: 5px;
-    font-family: "Comic Sans MS", "Comic Sans", cursive;
-    font-weight: bolder;
-    font-size: 40px;
-    visibility: hidden;
+	justify-self: flex-end;
+	color: #e0dbd1;
+	background-color: transparent;
+	border-color: #e0dbd1;
+	border-width: 5px;
+	font-family: 'Comic Sans MS', 'Comic Sans', cursive;
+	font-weight: bolder;
+	font-size: 40px;
+	visibility: hidden;
 }
-
