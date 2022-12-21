@@ -46,6 +46,7 @@ var winLoseButton = document.querySelector('.winLose');
 var goodGuesses = 0;
 var badGuesses = 0;
 var draw = new Draw(wordToGuess);
+const MAX_BAD_GUESSES = 7;
 
 const createButtons = () => {
 	for (let i = 0; i < alphabet.length; i++) {
@@ -58,7 +59,8 @@ const createButtons = () => {
 		letter.addEventListener('click', function () {
 			handleClick(alphabet[i], this);
 		});
-		if (i < 13) firstRow.appendChild(letter);
+		const MAX_ROW_SIZE = 13;
+		if (i < MAX_ROW_SIZE) firstRow.appendChild(letter);
 		else secondRow.appendChild(letter);
 	}
 	againButton.addEventListener('click', playAgain);
@@ -83,7 +85,7 @@ draw.drawUnderscores();
 createButtons();
 
 const handleClick = (letter, button) => {
-	if (badGuesses < 7 && goodGuesses < wordToGuess.length) {
+	if (badGuesses < MAX_BAD_GUESSES && goodGuesses < wordToGuess.length) {
 		check(letter);
 		button.style.visibility = 'hidden';
 	}
@@ -122,7 +124,7 @@ const handleGoodGuess = (letter) => {
 const handleBadGuess = (badGuesses) => {
 	if (badGuesses === 1) draw.drawHanger();
 	else draw.drawHangman(badGuesses);
-	if (badGuesses === 7) handleLose();
+	if (badGuesses === MAX_BAD_GUESSES) handleLose();
 };
 
 const handleLose = () => {
